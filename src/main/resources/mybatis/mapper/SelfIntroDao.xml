@@ -3,6 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.resumeManager.dao.SelfIntroDto">
+<mapper namespace="com.example.resumeManager.dao.ISelfIntroDao">
+  <select id="introList" resultType="com.example.resumeManager.dto.SelfIntroDto">
+  	SELECT * FROM self_intro WHERE user_id = #{userId}
+  </select>
   
+  <select id="introDetail" resultType="com.example.resumeManager.dto.SelfIntroDto">
+  	SELECT * FROM self_intro WHERE intro_id = #{introId}
+  </select>
+  
+  <insert id="introWrite">
+   INSERT INTO self_intro(
+       intro_id, user_id, title, company, job
+   )
+   VALUES (
+       seq_intro.NEXTVAL,
+       #{userId},
+       #{title},
+       #{company},
+       #{job}
+   )
+</insert>
+  
+  <update id="introEdit">
+  	UPDATE self_intro  SET title = #{title},
+            company = #{company},
+            job = #{job}
+        WHERE intro_id = #{introId}
+  </update>
+  
+  <delete id="introDelete">
+  	DELETE FROM self_intro
+		WHERE intro_id = #{introId}
+  </delete>
 </mapper>

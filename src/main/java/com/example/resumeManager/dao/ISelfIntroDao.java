@@ -11,11 +11,11 @@ import com.example.resumeManager.dto.SelfIntroDto;
 public interface ISelfIntroDao {
 	List<SelfIntroDto> introList(@Param("userId") String userId);
 	
-	SelfIntroDto introDetail(@Param("introId")int intro_id);
+	SelfIntroDto introDetail(@Param("introId")int introId);
 	
 	int introWrite(SelfIntroDto dto);
 	
 	int introEdit(SelfIntroDto dto);
 	
-	int introDelete(@Param("introId")int intro_id);
+	int introDelete(@Param("introId")int introId);
 }

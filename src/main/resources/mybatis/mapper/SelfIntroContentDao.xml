@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.resumeManager.dao.ISelfIntroContentDao">
+
+    <select id="contentList" resultType="com.example.resumeManager.dto.IntroContentDto">
+        SELECT content_id, intro_id, item_name, content_text
+        FROM intro_content
+        WHERE intro_id = #{introId}
+        ORDER BY content_id ASC
+    </select>
+
+    <insert id="contentWrite">
+        INSERT INTO intro_content (
+            content_id,
+            intro_id,
+            item_name,
+            content_text
+        )
+        VALUES (
+            seq_content.NEXTVAL,
+            #{introId},
+            #{itemName},
+            #{contentText}
+        )
+    </insert>
+
+    <update id="contentEdit">
+        UPDATE intro_content
+        SET item_name = #{itemName},
+            content_text = #{contentText}
+        WHERE content_id = #{contentId}
+    </update>
+
+    <delete id="contentDelete">
+        DELETE FROM intro_content
+        WHERE content_id = #{contentId}
+    </delete>
+
+</mapper>
