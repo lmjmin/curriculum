@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원정보 수정</title>
+</head>
+<body>
+
+<h1>회원정보 수정</h1>
+<hr>
+
+<form action="/updateUser" method="post">
+    
+ 	아이디: <input type="text" name="userId" th:value="${user.userId}" readonly><br>
+    비밀번호: <input type="password" name="pw" th:value="${user.pw}"><br>
+    이름: <input type="text" name="name" th:value="${user.name}"><br>
+    생년월일: <input type="date" name="birth" th:value="${user.birth}"><br>
+    이메일: <input type="email" name="email" th:value="${user.email}"><br>
+    전화번호: <input type="text" name="phone" th:value="${user.phone}"><br>
+    학력: <input type="text" name="education" th:value="${user.education}"><br>
+    보유 스킬: <input type="text" name="skill" th:value="${user.skill}"><br>
+    희망 직무: <input type="text" name="desiredJob" th:value="${user.desiredJob}"><br>
+    희망 근무지: <input type="text" name="desiredArea" th:value="${user.desiredArea}"><br>
+
+    <input type="submit" value="수정 완료">
+    <button type="button" onclick="location.href='/mypage'">취소</button>
+
+</form>
+
+</body>
+</html>

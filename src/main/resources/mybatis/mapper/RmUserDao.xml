@@ -3,49 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.example.resumeManager.dao.ISelfIntroDao">
+<mapper namespace="com.example.resumeManager.dao.IRmUserDao">
 
-    <select id="introList" resultType="com.example.resumeManager.dto.SelfIntroDto">
-        SELECT intro_id, user_id, title, company, job, created_at
-        FROM self_intro
-        WHERE user_id = #{userId}
-        ORDER BY intro_id DESC
-    </select>
-
-    <select id="introDetail" resultType="com.example.resumeManager.dto.SelfIntroDto">
-        SELECT intro_id, user_id, title, company, job, created_at
-        FROM self_intro
-        WHERE intro_id = #{introId}
-    </select>
-
-    <insert id="introWrite">
-        INSERT INTO self_intro (
-            intro_id,
-            user_id,
-            title,
-            company,
-            job
+    <insert id="signup">
+        INSERT INTO rm_user (
+            user_id, pw, name, birth, email, phone,
+            education, skill, desired_job, desired_area
         )
         VALUES (
-            seq_intro.NEXTVAL,
-            #{userId},
-            #{title},
-            #{company},
-            #{job}
+            #{userId}, #{pw}, #{name}, #{birth}, #{email}, #{phone},
+            #{education}, #{skill}, #{desiredJob}, #{desiredArea}
         )
     </insert>
 
-    <update id="introEdit">
-        UPDATE self_intro
-        SET title = #{title},
-            company = #{company},
-            job = #{job}
-        WHERE intro_id = #{introId}
+    <select id="login" resultType="com.example.resumeManager.dto.UserDto">
+        SELECT user_id, pw, name, birth, email, phone,
+               education, skill, desired_job, desired_area
+        FROM rm_user
+        WHERE user_id = #{userId}
+          AND pw = #{pw}
+    </select>
+
+    <select id="getUser" resultType="com.example.resumeManager.dto.UserDto">
+        SELECT user_id, pw, name, birth, email, phone,
+               education, skill, desired_job, desired_area
+        FROM rm_user
+        WHERE user_id = #{userId}
+    </select>
+
+    <update id="updateUser">
+        UPDATE rm_user
+        SET pw = #{pw},
+            name = #{name},
+            birth = #{birth},
+            email = #{email},
+            phone = #{phone},
+            education = #{education},
+            skill = #{skill},
+            desired_job = #{desiredJob},
+            desired_area = #{desiredArea}
+        WHERE user_id = #{userId}
     </update>
 
-    <delete id="introDelete">
-        DELETE FROM self_intro
-        WHERE intro_id = #{introId}
+    <delete id="deleteUser">
+        DELETE FROM rm_user
+        WHERE user_id = #{userId}
     </delete>
 
 </mapper>

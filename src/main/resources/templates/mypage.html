@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>마이페이지</title>
+</head>
+<body>
+
+<h1>마이페이지</h1>
+<hr>
+
+<p>아이디: <span th:text="${user.userId}"></span></p>
+<p>이름: <span th:text="${user.name}"></span></p>
+<p>이메일: <span th:text="${user.email}"></span></p>
+<p>전화번호: <span th:text="${user.phone}"></span></p>
+<p>학력: <span th:text="${user.education}"></span></p>
+<p>보유 스킬: <span th:text="${user.skill}"></span></p>
+<p>희망 직무: <span th:text="${user.desiredJob}"></span></p>
+
+<hr>
+<button onclick="location.href='/updateForm'">회원정보 수정</button>
+<button onclick="location.href='/introList'">자기소개서 목록</button>
+<button onclick="location.href='/logout'">로그아웃</button>
+
+</body>
+</html>

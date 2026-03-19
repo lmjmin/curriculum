@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.resumeManager.dto.SelfIntroDto;
-import com.example.resumeManager.service.SelfIntroContentService;
 import com.example.resumeManager.service.SelfIntroService;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,8 +18,6 @@ public class SelfIntroController {
 	@Autowired
     private SelfIntroService selfIntroService;
 
-    @Autowired
-    private SelfIntroContentService selfIntroContentService;
     
     @GetMapping("/introList")
     public String introList(HttpSession session, Model model) {

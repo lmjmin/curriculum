@@ -25,7 +25,7 @@ public class SelfIntroService {
 		return dao.introWrite(dto);
 	}
 	
-	int introEdit(SelfIntroDto dto) {
+	public int introEdit(SelfIntroDto dto) {
 		return dao.introEdit(dto);
 	}
 	
