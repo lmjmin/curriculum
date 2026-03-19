@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>자기소개서 목록</title>
+</head>
+<body>
+<h1>자기소개서 목록</h1>
+
+<a href="/introWriteForm">자기소개서 작성</a>
+<a href="/mypage">마이페이지</a>
+
+<table border="1">
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>회사</th>
+        <th>직무</th>
+        <th>작성일</th>
+    </tr>
+    <tr th:each="intro : ${introList}">
+        <td th:text="${intro.introId}"></td>
+        <td>
+            <a th:href="@{/introDetail(introId=${intro.introId})}"
+               th:text="${intro.title}"></a>
+        </td>
+        <td th:text="${intro.company}"></td>
+        <td th:text="${intro.job}"></td>
+        <td th:text="${intro.createdAt}"></td>
+    </tr>
+</table>
+</body>
+</html>
