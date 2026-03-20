@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.resumeManager.dto.UserDto;
+import com.example.resumeManager.dto.UserPhotoDto;
 import com.example.resumeManager.service.RmUserService;
+import com.example.resumeManager.service.UserPhotoService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +20,8 @@ public class RmUserController {
 
     @Autowired
     RmUserService service;
+    @Autowired
+    UserPhotoService photoService;
 
     @GetMapping("/")
     public String main() {
@@ -83,6 +87,9 @@ public class RmUserController {
 
         UserDto user = service.getUser(userId);
         model.addAttribute("user", user);
+
+        UserPhotoDto photo = photoService.getPhotoByUserId(userId);
+        model.addAttribute("photo", photo);
 
         return "mypage";
     }

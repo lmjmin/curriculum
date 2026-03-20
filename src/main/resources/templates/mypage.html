@@ -3,10 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
 <h1>마이페이지</h1>
+<hr>
+
+<div th:if="${photo != null}">
+    <img th:src="@{'/img/' + ${photo.fileName}}" width="150" height="150">
+</div>
+
+<div th:if="${photo == null}">
+    <p>등록된 사진이 없습니다.</p>
+</div>
+
+<form action="/uploadPhoto" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <button type="submit">사진 업로드</button>
+</form>
+
 <hr>
 
 <p>아이디: <span th:text="${user.userId}"></span></p>
@@ -18,6 +34,7 @@
 <p>희망 직무: <span th:text="${user.desiredJob}"></span></p>
 
 <hr>
+
 <button onclick="location.href='/updateForm'">회원정보 수정</button>
 <button onclick="location.href='/introList'">자기소개서 목록</button>
 <button onclick="location.href='/logout'">로그아웃</button>

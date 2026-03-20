@@ -12,18 +12,22 @@
   	SELECT * FROM self_intro WHERE intro_id = #{introId}
   </select>
   
-  <insert id="introWrite">
-   INSERT INTO self_intro(
-       intro_id, user_id, title, company, job
-   )
-   VALUES (
-       seq_intro.NEXTVAL,
-       #{userId},
-       #{title},
-       #{company},
-       #{job}
-   )
-</insert>
+	<insert id="introWrite">
+	    <selectKey keyProperty="introId" resultType="int" order="BEFORE">
+	        SELECT seq_intro.NEXTVAL FROM dual
+	    </selectKey>
+	
+	    INSERT INTO self_intro(
+	        intro_id, user_id, title, company, job
+	    )
+	    VALUES (
+	        #{introId},
+	        #{userId},
+	        #{title},
+	        #{company},
+	        #{job}
+	    )
+	</insert>
   
   <update id="introEdit">
   	UPDATE self_intro  SET title = #{title},

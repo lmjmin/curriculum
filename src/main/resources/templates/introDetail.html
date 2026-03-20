@@ -2,9 +2,84 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>자기소개서 상세</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+
+<h1>자기소개서 상세</h1>
+<hr>
+
+<!-- 기본 정보 -->
+<h3>기본 정보</h3>
+<p>제목: <span th:text="${introDto.title}"></span></p>
+<p>회사: <span th:text="${introDto.company}"></span></p>
+<p>직무: <span th:text="${introDto.job}"></span></p>
+
+<hr>
+
+<!-- 문항 목록 -->
+<h3>문항 목록</h3>
+
+<div th:if="${#lists.isEmpty(contentList)}">
+    <p>작성된 문항이 없습니다.</p>
+</div>
+
+<div th:each="c : ${contentList}">
+    <table border="1">
+        <tr>
+            <th>항목명</th>
+            <td th:text="${c.itemName}"></td>
+        </tr>
+        <tr>
+            <th>내용</th>
+            <td><pre th:text="${c.contentText}"></pre></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+
+                <!-- 삭제 -->
+                <form action="/contentDelete" method="post">
+                    <input type="hidden" name="contentId" th:value="${c.contentId}">
+                    <input type="hidden" name="introId" th:value="${introDto.introId}">
+                    <input type="submit" value="삭제">
+                </form>
+
+            </td>
+        </tr>
+    </table>
+    <br>
+</div>
+
+<hr>
+
+<!-- 문항 추가 -->
+<h3>문항 추가</h3>
+<form action="/contentAdd" method="post">
+
+    <input type="hidden" name="introId" th:value="${introDto.introId}">
+
+    항목명: <input type="text" name="itemName" required><br><br>
+
+    내용:<br>
+    <textarea name="contentText" rows="8" cols="60" required></textarea><br><br>
+
+    <input type="submit" value="추가">
+</form>
+
+<hr>
+
+<!-- 버튼 영역 -->
+<button th:onclick="|location.href='@{/introEditForm(introId=${introDto.introId})}'|">
+    자기소개서 수정
+</button>
+
+<form action="/introDelete" method="post" style="display:inline;">
+    <input type="hidden" name="introId" th:value="${introDto.introId}">
+    <input type="submit" value="삭제">
+</form>
+
+<button onclick="location.href='/introList'">목록</button>
 
 </body>
 </html>

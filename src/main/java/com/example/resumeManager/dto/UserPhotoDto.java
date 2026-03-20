@@ -9,7 +9,7 @@ import lombok.Data;
 public class UserPhotoDto {
 	private int photoId;
 	private String userId;
-	private String fileName;
-	private String filePath;
+	private String fileName;      // 서버 저장 이름
+	private String originalName;  // 원본 파일명
 	private LocalDate uploadDate;
 }

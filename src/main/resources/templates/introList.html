@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>자기소개서 목록</title>
+<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <h1>자기소개서 목록</h1>
@@ -28,6 +29,9 @@
         <td th:text="${intro.job}"></td>
         <td th:text="${intro.createdAt}"></td>
     </tr>
+    <tr th:if="${#lists.isEmpty(introList)}">
+	    <td colspan="5">작성된 자기소개서가 없습니다.</td>
+	</tr>
 </table>
 </body>
 </html>
